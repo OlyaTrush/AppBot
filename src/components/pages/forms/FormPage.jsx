@@ -6,6 +6,7 @@ import validationSchema from "../../../schemas/form";
 import InputMask from "react-input-mask";
 import { maskEmail } from "react-email-mask";
 import { postOffice, postServices } from "../../../mock";
+import { useTelegram } from "../../../hooks/useTelegram";
 
 const Form = () => {
   const [name, setName] = useState(localStorage.getItem("name") || "");
@@ -26,6 +27,7 @@ const Form = () => {
   const [paymentOption, setPaymentOption] = useState("online");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const history = useHistory();
+  const { onClose } = useTelegram();
 
   const handlePaymentOptionChange = (option) => {
     setPaymentOption(option);
@@ -63,6 +65,7 @@ const Form = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+    onClose();
   };
 
   function handleChange() {
